@@ -17,25 +17,25 @@
 
         @Html.HiddenFor(model => model.WaybillId)
 
-        <div class="card-body">
-            <div class="form-group-lg">
-                <label>Parcel weight</label>
-                @Html.TextBoxFor(model => model.Waybill_Total_weight, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Waybill_Total_weight)
-            </div>
-            <div class="form-group-lg">
-                <label>Number of parcels</label>
-                @Html.TextBoxFor(model => model.Waybil_Total_Parcels_Allocated, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Waybil_Total_Parcels_Allocated)
-            </div>
-            <div class="form-group-lg">
-                <label>Assign to Vehicle</label>
-                <br />
-                @Html.DropDownListFor(m => m.Vehicle_Registration_Number, (IEnumerable<SelectListItem>)ViewBag.listAuthers, "---Select---", new { @class = "form-control", id = "my_custom_id" })
-                @Html.ValidationMessageFor(model => model.Vehicle_Registration_Number)
-            </div>
-
+    <div class="card-body">
+        <div class="form-group-lg">
+            <label>Parcel weight</label>
+            @Html.TextBoxFor(model => model.Waybill_Total_weight, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Waybill_Total_weight)
         </div>
+        <div class="form-group-lg">
+            <label>Number of parcels</label>
+            @Html.TextBoxFor(model => model.Waybil_Total_Parcels_Allocated, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Waybil_Total_Parcels_Allocated)
+        </div>
+        <div class="form-group-lg">
+            <label>Assign to Vehicle</label>
+            <br />
+            @Html.DropDownListFor(m => m.Vehicle_Registration_Number, (IEnumerable<SelectListItem>)ViewBag.listAuthers, "---Select---", new { @class = "form-control", id = "my_custom_id" })
+            @Html.ValidationMessageFor(model => model.Vehicle_Registration_Number)
+        </div>
+
+    </div>
         <br />
         <br />
         <div class="card-footer" style="float:right;">

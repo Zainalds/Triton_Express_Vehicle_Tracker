@@ -95,7 +95,6 @@ namespace Triton_Express_Vehicle_Tracker.Controllers
                                where x.Vehicle_Registration_Number == waybill.Vehicle_Registration_Number
                                select x.Vehicle_Number_Plate).Single();
 
-            string n = numberPlate.ToString();
             Waybill obj = new Waybill();
 
             obj.WaybillId = waybill.WaybillId;

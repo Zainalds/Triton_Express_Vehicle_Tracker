@@ -4,15 +4,43 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<script>
+    function myFunction() {
+        var input, filter, table, tr, td, i;
+        input = document.getElementById("searchBox");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("myTable");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[0];
+            if (td) {
+                if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+</script>
+
 <center><h2 class="alert-success" style="font-family:'Comic Sans MS';">Waybills</h2></center>
 <br />
 <br />
 <center><text><a href="@Url.Action("AddOrEdit","Waybill")" class="glyphicon glyphicon-edit">Create</a></text></center>
 <br />
 <br />
+@using (Html.BeginForm("Index", "Waybill", FormMethod.Get))
+{
+    <p>
+        Search By Waybill ID: @Html.TextBox("searchString", ViewBag.CurrentFilter as string, new { id = "searchBox", onkeyup = "myFunction()" })
+    </p>
+}
+<br />
 <div>
-    <table style="width:100%">
+    <table style="width:100%" id="myTable">
         <tr>
+            <th>Waybill ID</th>
             <th>Vehicle Number Plate</th>
             <th>Total Weight</th>
             <th>Parcels Allocated</th>
@@ -20,6 +48,7 @@
         @foreach (var item in Model)
         {
             <tr>
+                <td>@Html.DisplayFor(model => item.WaybillId)</td>
                 <td>@Html.DisplayFor(model => item.Vehicle_Number_Plate)</td>
                 <td>@Html.DisplayFor(model => item.Waybill_Total_weight)</td>
                 <td>@Html.DisplayFor(model => item.Waybil_Total_Parcels_Allocated)</td>

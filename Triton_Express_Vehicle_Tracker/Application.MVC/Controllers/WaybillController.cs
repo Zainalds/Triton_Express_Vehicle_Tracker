@@ -37,8 +37,7 @@ namespace Application.MVC.Controllers
         }
         [HttpPost]
         public ActionResult AddOrEdit(WaybillViewModel emp)
-        {
-
+        {                
                 HttpResponseMessage response = Globalvariables.client.PostAsJsonAsync("api/Waybills", emp).Result;
                 TempData["SuccessMessage"] = "Saved Successfully";
 

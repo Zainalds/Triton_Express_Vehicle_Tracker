@@ -22,20 +22,6 @@ namespace Application.MVC.Controllers
             return View(list);
         }
 
-
-
-        /*[HttpGet]
-        public ActionResult Create()
-        {
-            return View();
-        }
-        [HttpPost]
-        public ActionResult Create(VehicleViewModel model)
-        {
-            HttpResponseMessage response = Globalvariables.client.PostAsJsonAsync("api/Vehicles", model).Result;
-            return RedirectToAction("Index", "Vehicle");
-        }*/
-
         public ActionResult AddOrEdit(int id = 0)
         {
             if (id == 0)
