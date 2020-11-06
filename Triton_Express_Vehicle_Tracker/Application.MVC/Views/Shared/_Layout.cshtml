@@ -1,45 +1,122 @@
-﻿<!DOCTYPE html>
-<html>
+﻿<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="">
+<!--<![endif]-->
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
-    @Styles.Render("~/Content/css")
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>@ViewBag.Title - Smart File System</title>
+    @*@Styles.Render("~/Content/css")*@
     @Scripts.Render("~/bundles/modernizr")
-    <link href="~/Content/bootstrap-chosen.css" rel="stylesheet" />
+
+
+
+    <meta name="description" content="Sufee Admin - HTML5 Admin Template">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="apple-touch-icon" href="apple-icon.png">
+    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="stylesheet" href="~/Content/assets/css/normalize.css">
+    <link rel="stylesheet" href="~/Content/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/Content/assets/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/Content/assets/css/themify-icons.css">
+    <link rel="stylesheet" href="~/Content/assets/css/flag-icon.min.css">
+    <link rel="stylesheet" href="~/Content/assets/css/cs-skin-elastic.css">
+    <!-- <link rel="stylesheet" href="~/Content/assets/css/bootstrap-select.less"> -->
+    <link rel="stylesheet" href="~/Content/assets/scss/style.css">
+    <link href="~/Content/assets/css/lib/vector-map/jqvmap.min.css" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
+    <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
+    <!-- Left Panel -->
+    <aside id="left-panel" class="left-panel">
+        <nav class="navbar navbar-expand-sm navbar-default">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu" aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="fa fa-bars"></i>
                 </button>
-                @Html.ActionLink("Triton Express", "Index", "Vehicle", new { area = "" }, new { @class = "navbar-brand" })
+                <a class="navbar-brand" href="@Url.Action("Index","Vehicle")"><img src="~/Content/retina-logo-1.png" alt="Logo"></a>
+                <a class="navbar-brand hidden" href="./"><img src="~/images/logo2.png" alt="Logo"></a>
             </div>
-            <div class="navbar-collapse collapse">
+            <div id="main-menu" class="main-menu collapse navbar-collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Vehicles", "Index", "Vehicle")</li>
-                    <li>@Html.ActionLink("New Vehicle", "AddOrEdit", "Vehicle")</li>
-                    <li>@Html.ActionLink("Waybills", "Index", "Waybill")</li>
-                    <li>@Html.ActionLink("Assign Waybill", "AddOrEdit", "Waybill")</li>
+                    <h3 class="menu-title">Options</h3><!-- /.menu-title -->
+                    <li class="menu-item-has-children dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-address-card"></i>View Vehicles</a>
+                        <ul class="sub-menu children dropdown-menu">
+
+                            <li><i class="fa fa-puzzle-piece"></i><a href="@Url.Action("Index","Vehicle")">Vehicles</a></li>
+
+
+                        </ul>
+                    </li>
+                    <li class="menu-item-has-children dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-list-ul"></i>View Waybills</a>
+                        <ul class="sub-menu children dropdown-menu">
+
+                            <li><i class="fa fa-id-badge"></i><a href="@Url.Action("Index","Waybill")">Waybills</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item-has-children dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Forms</a>
+                        <ul class="sub-menu children dropdown-menu">
+                            <li><i class="fa fa-table"></i><a href="@Url.Action("AddOrEdit","Vehicle")">New Vehicle</a></li>
+                            <li><i class="fa fa-id-badge"></i><a href="@Url.Action("AddOrEdit","Waybill")">New Waybill</a></li>
+                        </ul>
+                    </li>
                 </ul>
-            </div>
-        </div>
-    </div>
-    <div class="container body-content">
+            </div><!-- /.navbar-collapse -->
+        </nav>
+    </aside><!-- /#left-panel -->
+    <!-- Left Panel -->
+    <!-- Right Panel -->
+    <div id="right-panel" class="right-panel">
+        <!-- /# Render Body -->
         @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </div>
+    </div><!-- /#right-panel -->
+    <!-- Right Panel -->
+    <script src="~/Content/assets/js/vendor/jquery-2.1.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
+    <script src="~/Content/assets/js/plugins.js"></script>
+    <script src="~/Content/assets/js/main.js"></script>
+
+    <script src="~/Content/assets/js/lib/chart-js/Chart.bundle.js"></script>
+    <script src="~/Content/assets/js/dashboard.js"></script>
+    <script src="~/Content/assets/js/widgets.js"></script>
+    <script src="~/Content/assets/js/lib/vector-map/jquery.vmap.js"></script>
+    <script src="~/Content/assets/js/lib/vector-map/jquery.vmap.min.js"></script>
+    <script src="~/Content/assets/js/lib/vector-map/jquery.vmap.sampledata.js"></script>
+    <script src="~/Content/assets/js/lib/vector-map/country/jquery.vmap.world.js"></script>
+  
+    <script>
+        (function ($) {
+            "use strict";
+
+            jQuery('#vmap').vectorMap({
+                map: 'world_en',
+                backgroundColor: null,
+                color: '#ffffff',
+                hoverOpacity: 0.7,
+                selectedColor: '#1de9b6',
+                enableZoom: true,
+                showTooltip: true,
+                values: sample_data,
+                scaleColors: ['#1de9b6', '#03a9f5'],
+                normalizeFunction: 'polynomial'
+            });
+        })(jQuery);
+    </script>
+
+
+
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
-    <script src="~/Scripts/chosen.jquery.js"></script>
+
 </body>
 </html>
+

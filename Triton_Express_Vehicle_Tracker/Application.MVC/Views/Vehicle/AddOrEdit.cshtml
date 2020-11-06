@@ -1,73 +1,135 @@
 ﻿@model Application.MVC.Models.VehicleViewModel
 
 @{
-    /**/
-
-    ViewBag.Title = "Capture Vehicle";
+    ViewBag.Title = "Vehicles";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<center><h2 class="alert-success" style="font-family:'Comic Sans MS';">Vehicle Entry Form</h2></center>
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="">
+<!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>New Vehicle</title>
+    <meta name="description" content="Sufee Admin - HTML5 Admin Template">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="apple-touch-icon" href="apple-icon.png">
+    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="stylesheet" href="~/Content/assets//css/normalize.css">
+    <link rel="stylesheet" href="~/Content/assets//css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/Content/assets//css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/Content/assets//css/themify-icons.css">
+    <link rel="stylesheet" href="~/Content/assets//css/flag-icon.min.css">
+    <link rel="stylesheet" href="~/Content/assets//css/cs-skin-elastic.css">
+    <!-- <link rel="stylesheet" href="~/Content/assets//css/bootstrap-select.less"> -->
+    <link rel="stylesheet" href="~/Content/assets//scss/style.css">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
+    <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
+    @*<title>jQuery UI Datepicker - Default functionality</title>*@
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+</head>
+<body>
 
-<br />
-<br />
-<div class="card">
-    <div class="card-header"></div>
+    <div class="breadcrumbs">
+        <div class="col-sm-4">
+            <div class="page-header float-left">
+                <div class="page-title">
+                    <h1>Triton Express</h1>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-8">
+            <div class="page-header float-right">
+                <div class="page-title">
+                    <ol class="breadcrumb text-right">
+                        <li class="active">Home</li>
+                        <li><a href="#">Vehicles</a></li>
+                        <li><a href="#">New Vehicle</a></li>
+
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
     @using (Html.BeginForm())
     {
+        @Html.AntiForgeryToken()
 
-        @Html.HiddenFor(model => model.Vehicle_Registration_Number)
 
-        <div class="card-body">
-            <div class="form-group-lg">
-                <label>Vehicle Number Plate</label>
-                @Html.TextBoxFor(model => model.Vehicle_Number_Plate, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Vehicle_Number_Plate)
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="col-lg-10">
+            <div class="card">
+                <div class="card-header">
+                    <strong>Vehicle Details</strong>
+                </div>
+                @Html.HiddenFor(model => model.Vehicle_Registration_Number)
+                <div class="card-body card-block">
+                    <div class="row form-group">
+                        <div class="col col-md-3"><label for="text-input" class=" form-control-label">Number Plate</label></div>
+                        <div class="col-12 col-md-9">
+                            @Html.TextBoxFor(model => model.Vehicle_Number_Plate, new { htmlAttributes = new { @class = "form-control", placeholder = "Name" } })
+                            @Html.ValidationMessageFor(model => model.Vehicle_Number_Plate, "", new { @class = "text-danger" })
+                        </div>
+
+                    </div>
+                    <div class="row form-group">
+                        <div class="col col-md-3"><label for="text-input" class=" form-control-label">Vehicle Make</label></div>
+                        <div class="col-12 col-md-9">
+                            @Html.TextBoxFor(model => model.Vehicle_Make, new { htmlAttributes = new { @class = "form-control", placeholder = "Surname" } })
+                            @Html.ValidationMessageFor(model => model.Vehicle_Make, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col col-md-3"><label for="text-input" class=" form-control-label">Vehicle Model</label></div>
+                        <div class="col-12 col-md-9">
+                            @* <input type="text" id="text-input" name="text-input" placeholder="Identity No" class="form-control">*@
+                            @Html.TextBoxFor(model => model.Vehicle_Model, new { htmlAttributes = new { @class = "form-control", placeholder = "Identity No" } })
+                            @Html.ValidationMessageFor(model => model.Vehicle_Model, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    @{
+                        List<SelectListItem> listItems = new List<SelectListItem>();
+                        listItems.Add(new SelectListItem
+                        {
+                            Text = "Durban",
+                            Value = "Durban"
+                        });
+                        listItems.Add(new SelectListItem
+                        {
+                            Text = "Johannesburg",
+                            Value = "Johannesburg",
+                            Selected = true
+                        });
+                    }
+                    <div class="row form-group">
+                        <div class="col col-md-3"><label for="text-input" class=" form-control-label">Branch</label></div>
+                        <div class="col-12 col-md-9">
+                            @* <input type="text" id="text-input" name="text-input" placeholder="Identity No" class="form-control">*@
+                            @Html.DropDownListFor(model => model.Branch, listItems, new { @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="form-group-lg">
-                <label>Vehicle Make</label>
-                @Html.TextBoxFor(model => model.Vehicle_Make, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Vehicle_Make)
+            <div class="card-footer" align="right">
+                <input type="submit" value="Submit " class="btn btn-primary btn-md" />
             </div>
-            <div class="form-group-lg">
-                <label>Vehicle Model</label>
-                @Html.TextBoxFor(model => model.Vehicle_Model, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Vehicle_Model)
-            </div>
-
-
-            @{
-                List<SelectListItem> listItems = new List<SelectListItem>();
-                listItems.Add(new SelectListItem
-                {
-                    Text = "Durban",
-                    Value = "Durban"
-                });
-                listItems.Add(new SelectListItem
-                {
-                    Text = "Johannesburg",
-                    Value = "Johannesburg",
-                    Selected = true
-                });
-            }
-
-            <div class="form-group-lg">
-                <label>Branch</label>
-                @Html.DropDownListFor(model => model.Branch, listItems, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Branch)
-            </div>
-            <br />
-            <br />
-
-        </div>
-        <div class="card-footer" style="float:right;">
-            <input type="submit" value="Save" class="btn btn-success" />
         </div>
     }
-</div>
 
 
 
+</body>
+</html>
 @section scripts{
     @Scripts.Render("~/bundles/jqueryval");
 }
