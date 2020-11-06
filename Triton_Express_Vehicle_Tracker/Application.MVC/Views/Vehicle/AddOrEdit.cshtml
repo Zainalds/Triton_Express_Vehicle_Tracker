@@ -1,0 +1,73 @@
+﻿@model Application.MVC.Models.VehicleViewModel
+
+@{
+    /**/
+
+    ViewBag.Title = "Capture Vehicle";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<center><h2 class="alert-success" style="font-family:'Comic Sans MS';">Vehicle Entry Form</h2></center>
+
+<br />
+<br />
+<div class="card">
+    <div class="card-header"></div>
+    @using (Html.BeginForm())
+    {
+
+        @Html.HiddenFor(model => model.Vehicle_Registration_Number)
+
+        <div class="card-body">
+            <div class="form-group-lg">
+                <label>Vehicle Number Plate</label>
+                @Html.TextBoxFor(model => model.Vehicle_Number_Plate, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Vehicle_Number_Plate)
+            </div>
+            <div class="form-group-lg">
+                <label>Vehicle Make</label>
+                @Html.TextBoxFor(model => model.Vehicle_Make, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Vehicle_Make)
+            </div>
+            <div class="form-group-lg">
+                <label>Vehicle Model</label>
+                @Html.TextBoxFor(model => model.Vehicle_Model, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Vehicle_Model)
+            </div>
+
+
+            @{
+                List<SelectListItem> listItems = new List<SelectListItem>();
+                listItems.Add(new SelectListItem
+                {
+                    Text = "Durban",
+                    Value = "Durban"
+                });
+                listItems.Add(new SelectListItem
+                {
+                    Text = "Johannesburg",
+                    Value = "Johannesburg",
+                    Selected = true
+                });
+            }
+
+            <div class="form-group-lg">
+                <label>Branch</label>
+                @Html.DropDownListFor(model => model.Branch, listItems, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Branch)
+            </div>
+            <br />
+            <br />
+
+        </div>
+        <div class="card-footer" style="float:right;">
+            <input type="submit" value="Save" class="btn btn-success" />
+        </div>
+    }
+</div>
+
+
+
+@section scripts{
+    @Scripts.Render("~/bundles/jqueryval");
+}

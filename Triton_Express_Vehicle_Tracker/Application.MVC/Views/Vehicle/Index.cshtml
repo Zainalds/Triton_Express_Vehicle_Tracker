@@ -1,0 +1,60 @@
+﻿@model IEnumerable<Application.MVC.Models.VehicleViewModel>
+@{
+    ViewBag.Title = "Vehicles";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script>
+    function myFunction() {
+        var input, filter, table, tr, td, i;
+        input = document.getElementById("searchBox");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("myTable");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[0];
+            if (td) {
+                if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+</script>
+
+<center><h2 class="alert-success" style="font-family:'Comic Sans MS';">Vehicle Inventory</h2></center>
+<br />
+<br />
+<center><text><a href="@Url.Action("AddOrEdit","Vehicle")" class="glyphicon glyphicon-edit">Create</a></text></center>
+<br />
+<br />
+@using (Html.BeginForm("Index", "Vehicle", FormMethod.Get))
+{
+    <p>
+        Search By Vehicle Number Plate: @Html.TextBox("searchString", ViewBag.CurrentFilter as string, new { id = "searchBox", onkeyup = "myFunction()" })
+        <input type="submit" value="Search" />
+    </p>
+}
+<br />
+<div>
+    <table style="width:100%" id="myTable">
+        <tr>
+            <th>Vehicle Number Plate</th>
+            <th>Make</th>
+            <th>Model</th>
+            <th>Branch</th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(model => item.Vehicle_Number_Plate)</td>
+                <td>@Html.DisplayFor(model => item.Vehicle_Make)</td>
+                <td>@Html.DisplayFor(model => item.Vehicle_Model)</td>
+                <td>@Html.DisplayFor(model => item.Branch)</td>
+                <td><a href="@Url.Action("AddOrEdit","Vehicle", new { Id = item.Vehicle_Registration_Number})" class="btn btn-default"><i class="glyphicon glyphicon-edit"></i>Edit</a></td>
+            </tr>
+        }
+    </table>
+</div>
