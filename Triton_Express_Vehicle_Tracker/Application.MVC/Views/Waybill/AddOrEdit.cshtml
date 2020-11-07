@@ -93,17 +93,30 @@
                             @Html.ValidationMessageFor(model => model.Waybil_Total_Parcels_Allocated, "", new { @class = "text-danger" })
                         </div>
                     </div>
-                    <div class="row form-group">
-                        <div class="col col-md-3"><label for="text-input" class=" form-control-label">Vehicle</label></div>
-                        <div class="col-12 col-md-9">
-                            @* <input type="text" id="text-input" name="text-input" placeholder="Identity No" class="form-control">*@
-                            @Html.DropDownListFor(m => m.Vehicle_Registration_Number, (IEnumerable<SelectListItem>)ViewBag.listAuthers, "---Select---", new { @class = "form-control", id = "my_custom_id" })
-                            @Html.ValidationMessageFor(model => model.Vehicle_Registration_Number, "", new { @class = "text-danger" })
+                    @if (ViewBag.n == null)
+                    {
+                        <div class="row form-group">
+                            <div class="col col-md-3"><label for="text-input" class=" form-control-label">Vehicle</label></div>
+                            <div class="col-12 col-md-9">
+                                @Html.DropDownListFor(m => m.Vehicle_Registration_Number, (IEnumerable<SelectListItem>)ViewBag.listAuthers, "---Select---", new { @class = "form-control", id = "my_custom_id" })
+                                @Html.ValidationMessageFor(model => model.Vehicle_Registration_Number, "", new { @class = "text-danger" })
+                            </div>
                         </div>
-                    </div>
+                    }
+                    else
+                    {
+                        <div class="row form-group">
+                            <div class="col col-md-3"><label for="text-input" class=" form-control-label">Vehicle</label></div>
+                            <div class="col-12 col-md-9">
+                                @Html.TextBoxFor(model => model.Vehicle_Number_Plate, new { @class = "form-control", Value = ViewBag.n, @readonly = "readonly" })
+                                @Html.ValidationMessageFor(model => model.Vehicle_Registration_Number, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    }
                 </div>
             </div>
             <div class="card-footer" align="right">
+                <a href="@Url.Action("Index","Waybill")" class="btn btn-danger">Cancel</a>
                 <input type="submit" value="Submit " class="btn btn-primary btn-md" />
             </div>
         </div>

@@ -31,17 +31,46 @@ namespace Application.MVC.Controllers
             }
             else
             {
-                HttpResponseMessage response = Globalvariables.client.GetAsync("api/Waybills/" + id.ToString()).Result;
-                return View(response.Content.ReadAsAsync<WaybillViewModel>().Result);
+                Waybillddl lc = new Waybillddl();
+                var numberPlate = (from x in lc.GetVehicleId()
+                                   where x.Vehicle_Registration_Number == id
+                                   select x.Vehicle_Number_Plate).Single();
+
+                ViewBag.n = numberPlate.ToString();
+                return View();
             }
         }
         [HttpPost]
         public ActionResult AddOrEdit(WaybillViewModel emp)
-        {                
+        {
+
+            if(emp.Vehicle_Number_Plate == null)
+            {
                 HttpResponseMessage response = Globalvariables.client.PostAsJsonAsync("api/Waybills", emp).Result;
                 TempData["SuccessMessage"] = "Saved Successfully";
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                Waybillddl lc = new Waybillddl();
 
-            return RedirectToAction("Index");
+                int Vehicle_Registration_Number = (from x in lc.GetVehicleId()
+                                                   where x.Vehicle_Number_Plate == emp.Vehicle_Number_Plate
+                                                   select x.Vehicle_Registration_Number).Single();
+
+                WaybillViewModel obj = new WaybillViewModel();
+
+                obj.WaybillId = emp.WaybillId;
+                obj.Waybill_Total_weight = emp.Waybill_Total_weight;
+                obj.Waybil_Total_Parcels_Allocated = emp.Waybil_Total_Parcels_Allocated;
+                obj.Vehicle_Registration_Number = Vehicle_Registration_Number;
+                obj.Vehicle_Number_Plate = emp.Vehicle_Number_Plate;
+
+                HttpResponseMessage response = Globalvariables.client.PostAsJsonAsync("api/Waybills", obj).Result;
+                TempData["SuccessMessage"] = "Saved Successfully";
+
+                return RedirectToAction("Index");
+            }
         }
     }
 }

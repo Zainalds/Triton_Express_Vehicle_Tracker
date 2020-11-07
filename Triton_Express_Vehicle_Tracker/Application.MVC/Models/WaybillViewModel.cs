@@ -12,15 +12,15 @@ namespace Application.MVC.Models
         public int WaybillId { get; set; }
 
         [Required]
+        [Display(Name = "Total Weight")]
         public string Waybill_Total_weight { get; set; }
         [Required]
-
+        [Display(Name = "Total Parcels")]
         public string Waybil_Total_Parcels_Allocated { get; set; }
-        [Required]
-
+        [Display(Name = "Registration Number")]
         public int Vehicle_Registration_Number { get; set; }
         [Required]
-
+        [Display(Name = "Number Plate")]
         public string Vehicle_Number_Plate { get; set; }
 
         [ForeignKey("Vehicle_Registration_Number")]

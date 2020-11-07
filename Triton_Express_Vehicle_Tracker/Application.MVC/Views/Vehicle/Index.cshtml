@@ -72,40 +72,42 @@
                                         <th>@Html.DisplayName("Number Plate")</th>
                                         <th>@Html.DisplayName("Vehicle Make")</th>
                                         <th>@Html.DisplayName("Vehicle Model")</th>
+                                        <th>@Html.DisplayName("Branch")</th>
                                         <th> View Actions </th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach (var item in Model)
                                     {
-                                        <tr>
-                                            <td style="font-weight:bold;">@Html.DisplayFor(modelItem => item.Vehicle_Number_Plate)</td>
-                                            <td style="font-weight:bold;">@Html.DisplayFor(modelItem => item.Vehicle_Make)</td>
-                                            <td style="font-weight:bold;">@Html.DisplayFor(modelItem => item.Vehicle_Model)</td>
-                                            <td>
-                                                <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-                                                    <div class="btn-group" role="group">
-                                                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                            Select Action
-                                                        </button>
-                                                        <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                                                            <div>
-                                                                <a class="dropdown-item" href="@Url.Action("AddOrEdit","Vehicle")">New Vehicle</a>
-                                                                <a class="dropdown-item" href="@Url.Action("AddOrEdit","Waybill")">New Waybill</a>
-                                                            </div>
-                                                            <div class="dropdown-divider"></div>
-                                                            <div class="dropdown-header"><b>View </b></div>
-                                                            <div class="dropdown-divider"></div>
-                                                            <div>
-                                                                <a class="dropdown-item" href="@Url.Action("AddOrEdit", "Vehicle", new {Id =item.Vehicle_Registration_Number })">Edit</a>
-
-                                                            </div>
+                                    <tr>
+                                        <td style="font-weight:bold;">@Html.DisplayFor(modelItem => item.Vehicle_Number_Plate)</td>
+                                        <td style="font-weight:bold;">@Html.DisplayFor(modelItem => item.Vehicle_Make)</td>
+                                        <td style="font-weight:bold;">@Html.DisplayFor(modelItem => item.Vehicle_Model)</td>
+                                        <td style="font-weight:bold;">@Html.DisplayFor(modelItem => item.Branch)</td>
+                                        <td>
+                                            <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+                                                <div class="btn-group" role="group">
+                                                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        Select Action
+                                                    </button>
+                                                    <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                                                        <div>
+                                                            <a class="dropdown-item" href="@Url.Action("AddOrEdit","Vehicle")">NEW VEHICLE</a>
+                                                            <a class="dropdown-item" href="@Url.Action("AddOrEdit","Waybill", new {id =item.Vehicle_Registration_Number })">ASSIGN WAYBILL</a>
                                                         </div>
+                                                        <div class="dropdown-divider"></div>
+                                                        <div class="dropdown-header"><b>View </b></div>
+                                                        <div class="dropdown-divider"></div>
+                                                        <div>
+                                                            <a class="dropdown-item" href="@Url.Action("AddOrEdit", "Vehicle", new {Id =item.Vehicle_Registration_Number })">UPDATE DETAILS</a>
 
+                                                        </div>
                                                     </div>
+
                                                 </div>
-                                            </td>
-                                        </tr>
+                                            </div>
+                                        </td>
+                                    </tr>
                                     }
 
                                 </tbody>
