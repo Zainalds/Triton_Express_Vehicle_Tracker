@@ -72,5 +72,11 @@ namespace Application.MVC.Controllers
                 return RedirectToAction("Index");
             }
         }
+
+        public ActionResult Delete(int Id)
+        {
+            HttpResponseMessage response = Globalvariables.client.DeleteAsync("api/Waybills/" + Id.ToString()).Result;
+            return RedirectToAction("Index");
+        }
     }
 }
